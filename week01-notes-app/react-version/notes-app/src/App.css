@@ -1,0 +1,133 @@
+/* Variables básicas */
+:root{
+  --bg:#f7f9fc;
+  --card:#ffffff;
+  --primary:#2563eb;
+  --muted:#6b7280;
+  --danger:#ef4444;
+  --shadow: 0 6px 18px rgba(16,24,40,0.06);
+  --radius:8px;
+  --gap:12px;
+  --max-width:720px;
+}
+
+html, body, #root {
+  height:100%;
+  margin:0;
+  font-family: Inter, Roboto, "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg, #f3f6fb 0%, var(--bg) 100%);
+  color:#111827;
+}
+
+.app {
+  max-width: var(--max-width);
+  margin: 2.5rem auto;
+  background: transparent;
+  padding: 1rem;
+}
+
+/* Cabecera con logos */
+.app > .header {
+  display:flex;
+  gap:1rem;
+  align-items:center;
+  margin-bottom:1rem;
+}
+.logo {
+  width:48px;
+  height:48px;
+}
+.logo.react { transform: scale(0.95); }
+
+/* Título */
+h1 {
+  margin:0 0 1rem 0;
+  font-size:1.5rem;
+  font-weight:600;
+  color:#0f172a;
+}
+
+/* Formulario de entrada */
+.form-row {
+  display:flex;
+  gap:var(--gap);
+  align-items:center;
+  margin-bottom:1rem;
+}
+input[type="text"]{
+  flex:1;
+  padding:0.5rem 0.75rem;
+  border:1px solid #e6eef8;
+  background:var(--card);
+  border-radius:6px;
+  box-shadow:var(--shadow);
+  outline:none;
+  transition:box-shadow .15s, border-color .12s;
+}
+input[type="text"]:focus{
+  border-color: var(--primary);
+  box-shadow: 0 6px 20px rgba(37,99,235,0.08);
+}
+
+/* Botones */
+button{
+  padding:0.5rem 0.75rem;
+  border-radius:6px;
+  border:none;
+  cursor:pointer;
+  background:var(--primary);
+  color:white;
+  font-weight:600;
+  box-shadow: 0 6px 14px rgba(37,99,235,0.12);
+}
+button:hover{ filter:brightness(.98); }
+button.danger{
+  background:var(--danger);
+  box-shadow: 0 6px 14px rgba(239,68,68,0.12);
+}
+
+/* Lista de notas */
+ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:grid;
+  gap:0.5rem;
+}
+li{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0.6rem;
+  background:var(--card);
+  border-radius:var(--radius);
+  border:1px solid rgba(15,23,42,0.04);
+  box-shadow:var(--shadow);
+  gap:0.5rem;
+}
+li button{
+  background:transparent;
+  color:var(--muted);
+  padding:0.25rem 0.5rem;
+  box-shadow:none;
+  border-radius:6px;
+}
+li button:hover{ color:var(--danger); transform:translateY(-1px); }
+
+/* Texto de la nota */
+.note-text{
+  word-break:break-word;
+  color:#0b1220;
+  flex:1;
+  margin-right:0.5rem;
+}
+
+/* Estilos para placeholders y accesibilidad */
+input::placeholder { color: #9aa4b2; opacity:1; }
+
+/* Responsive */
+@media (max-width:520px){
+  .logo{ display:none; }
+  .form-row{ flex-direction:column; align-items:stretch; }
+  button{ width:100%; }
+}
