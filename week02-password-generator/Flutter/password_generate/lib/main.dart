@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // << agregado para Clipboard
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +33,8 @@ class _MyHomePageState extends State<MyHomePage> {
   bool includeUppercase = false;
   bool includeNumbers = false;
   bool includeSpecialChars = false;
+
+  List<String> history = []; // <-- lista para almacenar contraseñas generadas
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +90,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   includeNumbers,
                   includeSpecialChars,
                 );
+                // Guardar en historial (al inicio)
+                setState(() => history.insert(0, pw));
+
                 showDialog(
                   context: context,
                   builder:
@@ -94,6 +100,15 @@ class _MyHomePageState extends State<MyHomePage> {
                         title: const Text('Contraseña generada'),
                         content: SelectableText(pw),
                         actions: [
+                          TextButton(
+                            onPressed: () {
+                              Clipboard.setData(
+                                ClipboardData(text: pw),
+                              ); // copiar al portapapeles
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('Copiar y cerrar'),
+                          ),
                           TextButton(
                             onPressed: () => Navigator.of(context).pop(),
                             child: const Text('Cerrar'),
@@ -104,9 +119,68 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text('Generar contraseña'),
             ),
+
+            const SizedBox(height: 12),
+
+            // Botón para ver historial — reemplaza la línea con el error
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => HistoryPage(history: history),
+                  ),
+                );
+              },
+              child: const Text('Ver historial'),
+            ),
           ],
         ),
       ),
+    );
+  }
+}
+
+// Nuevo widget para mostrar el historial de contraseñas
+class HistoryPage extends StatelessWidget {
+  final List<String> history;
+  const HistoryPage({super.key, required this.history});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Historial de contraseñas')),
+      body:
+          history.isEmpty
+              ? const Center(child: Text('No hay contraseñas generadas'))
+              : ListView.separated(
+                padding: const EdgeInsets.all(12),
+                itemCount: history.length,
+                separatorBuilder: (_, __) => const SizedBox(height: 8),
+                itemBuilder: (context, index) {
+                  final pw = history[index];
+                  return ListTile(
+                    title: SelectableText(pw),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.copy),
+                          tooltip: 'Copiar',
+                          onPressed: () {
+                            Clipboard.setData(ClipboardData(text: pw));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Contraseña copiada'),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
     );
   }
 }
