@@ -47,5 +47,25 @@ Nueva app: un temporizador Pomodoro ⏱️.
 La idea es ayudar a mejorar la productividad con ciclos de trabajo y descanso.
 La hare en react como en C#
 
-<============================= DÍA 15 =======================================================>
+<============================= DÍA 16 =======================================================>
 la app esta echa tanto en react como en c# aunque hay modificaciones en cada una
+
+<============================= 🗓️ DÍA 22 =======================================================>
+
+📌 Aplicación de tareas (To-Do List)
+
+Hoy comienzo con la Semana 4 del #52AppsChallenge 💻
+El objetivo es crear una app de tareas conectada a una base de datos, donde pueda:
+✅ Crear nuevas tareas
+🗑️ Eliminar tareas
+👀 Mostrar todas las tareas guardadas
+
+Este proyecto me permitirá practicar:
+
+Operaciones CRUD (Create, Read, Update, Delete)
+
+Manejo de persistencia de datos
+
+Conexión entre frontend y backend
+
+Uso de React yPython con una pequeña base de datos local o API
