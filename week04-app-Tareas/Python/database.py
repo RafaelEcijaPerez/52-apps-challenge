@@ -60,3 +60,4 @@ def delete_task(task_id):
     conexion.commit()
     conexion.close()
 
+create_table()

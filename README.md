@@ -68,4 +68,7 @@ Manejo de persistencia de datos
 
 Conexión entre frontend y backend
 
-Uso de React yPython con una pequeña base de datos local o API
+Uso de Python con una pequeña base de datos local
+
+<============================= 🗓️ DÍA 24 =======================================================>
+La aplicacion ya esta completa hace el crud perfectamente y la he diseñado para que cualquier persona lo consiga 

@@ -3,12 +3,14 @@ import database
 
 def validate_task_data(title, status):
     """Valida los datos básicos de una tarea"""
+    valid_status = ['pending', 'in progress', 'completed', 'pendiente', 'completa']
     errors = []
     if not title or len(title.strip()) == 0:
         errors.append("Title is required")
-    if not status or status not in ['pending', 'in progress', 'completed']:
-        errors.append("Valid status is required (pending, in progress, completed)")
+    if not status or status.lower() not in valid_status:
+        errors.append("Valid status is required (pendiente, completa, in progress, completed)")
     return errors
+
 
 #Función para agregar una nueva tarea
 def add_task(title, description, status):
